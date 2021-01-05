@@ -9,6 +9,7 @@ const FormElements =(props) => {
                 <div>
                     <input 
                             onBlur={alert("onBlur")} 
+                            // onFocusOut (this is not recognized)
                             className={styles.FormElements}  
                             type={props.elementConfig.type} 
                             onChange={props.changed} 
