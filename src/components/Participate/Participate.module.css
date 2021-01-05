@@ -1,0 +1,20 @@
+.Participate{
+    display: block;
+    box-shadow: aqua;
+    box-sizing: border-box;
+}
+.Button {
+    background-color:#398B93;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    /* margin: 10px; */
+    margin-left: 400px;
+    margin-top: 40px;
+    font-weight: bold;
+    
+}
+

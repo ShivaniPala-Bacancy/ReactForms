@@ -1,0 +1,38 @@
+.Input{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    
+
+}
+.Label{
+    font-weight: bold;
+    font-size: larger;
+    display: block;
+    margin-bottom: 8px;
+    
+}
+.InnerLabel{
+    font-weight: 400;
+    font-size: large;
+    /* display: block; */
+    margin-bottom: 6px;
+    margin-left: 50px;
+    margin-right: 0px;
+}
+.FormElements{
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
+.FormElements:focus{
+    outline: none;
+    background-color: #ccc;
+}

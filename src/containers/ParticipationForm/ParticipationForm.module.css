@@ -1,0 +1,65 @@
+.Form{
+    
+    border: 1px solid rgb(78, 116, 121);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    width: 800px;
+}
+.ContactData{
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.Input{
+    display: block;
+}
+.FormHeading{
+    border: 1px solid #398B93;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    margin-bottom: 0px;
+    overflow: hidden;
+    width: 800px;
+}
+
+.Header {
+    background-color: #398B93;
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0px;
+    /* width: 400px; */
+    
+  margin-left: auto;
+  margin-right: auto;
+ }
+ 
+    .Button {
+        background-color:#398B93;
+        border-radius: 5px;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        font: inherit;
+        padding: 10px;
+        /* margin: 10px; */
+        margin-left: 46%;
+        margin-top: 40px;
+        font-weight: bold;
+        
+        
+    }
+    
+    
+ 
