@@ -7,7 +7,8 @@ const FormElements =(props) => {
         case('input'):
             formElement= 
                 <div>
-                    <input  
+                    <input 
+                            onBlur={alert("onBlur")} 
                             className={styles.FormElements}  
                             type={props.elementConfig.type} 
                             onChange={props.changed} 
