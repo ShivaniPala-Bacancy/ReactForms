@@ -1,6 +1,5 @@
 import React from 'react';
 import {Route, NavLink} from 'react-router-dom';
-import ParticipationForm from '../../containers/ParticipationForm/ParticipationForm'
 import styles from './Participate.module.css'
 
 

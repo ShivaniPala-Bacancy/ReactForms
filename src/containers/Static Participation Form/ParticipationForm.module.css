@@ -1,0 +1,16 @@
+
+.Select{
+    width: 60%;
+    padding: 0px; 
+    box-sizing: border-box;
+    font-size: medium;
+    border-radius: 5px;
+    border: 2px solid blue
+}
+.Label{
+    font-weight: bold;
+    font-size: larger;
+    display: block;
+    color: rgb(101, 18, 235);
+    margin-bottom: 8px;  
+}

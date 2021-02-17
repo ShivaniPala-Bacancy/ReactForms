@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import FormElements from '../../components/FormElements/FormElements'
 import axios from 'axios';
-import Spinner from '../../UI/spinner/spinner'
+import Spinner from '../spinner/spinner'
 import styles from './ParticipationForm.module.css'
-import {required, email, lt } from '../../Validations/Validations'
 class ParticipationForm extends Component{
     state={
         loading: false,
+        formIsValid: false,
         formElements: {
             Name: {
                 elementType: 'input',
@@ -30,7 +30,7 @@ class ParticipationForm extends Component{
                 value: '',
                 validation:{
                     required: true,
-                    email: true
+                    
                 }, valid: false,
                 touched: false
             },
@@ -72,7 +72,7 @@ class ParticipationForm extends Component{
                 value: '',
                 validation:{
                     required: true,
-                }, valid: false,
+                }, valid: true,
                 touched: false
             },
             CollegeName: {
@@ -90,7 +90,7 @@ class ParticipationForm extends Component{
                 value: 'gecg',
                 validation:{
                     required: true,
-                }, valid: false,
+                }, valid: true,
                 touched: false
             }
 
@@ -101,10 +101,37 @@ class ParticipationForm extends Component{
         event.preventDefault();
         console.log(this.selectedSubjects);
         const formData={}
+        let formIsValidTemp= true;
         for(let formElementIdentifier in this.state.formElements){
             formData[formElementIdentifier] = this.state.formElements[formElementIdentifier].value;
+            formIsValidTemp= formIsValidTemp && this.state.formElements[formElementIdentifier].valid;
+            console.log("temp is : " + formIsValidTemp)
+            console.log(this.state.formElements[formElementIdentifier].valid)
         };
-        formData["subjects"] = this.selectedSubjects;
+        console.log(formIsValidTemp + " finally")
+        let selectedSubjects= [];
+        for(let i in this.selectedSubjects){
+            let l=(this.selectedSubjects.filter(x => x === this.selectedSubjects[i]).length);
+            console.log("is is: " + i + " l is: " + l);
+            if((l %2 !== 0) && (!selectedSubjects.includes(this.selectedSubjects[i]))) {
+                selectedSubjects.push(this.selectedSubjects[i]);
+            }       
+        }
+        console.log(selectedSubjects);
+        // if(formIsValidTemp === true){
+        //     console.log("in true")
+        //     this.setState({formIsValid: true});
+        // }
+        // else{
+        //     this.setState({formIsValid: false});
+        // }
+        console.log(this.state.formIsValid)
+        formData["Subjects"] = selectedSubjects;
+        console.log(formData)
+        if(!this.state.formIsValid){
+            alert(this.state.formIsValid);
+            return;
+        }
         this.setState({loading: true})
         axios.post('https://react-forms-practice-default-rtdb.firebaseio.com/personalFormDetails.json', formData)
         .then(response => {
@@ -119,29 +146,33 @@ class ParticipationForm extends Component{
         console.log(formData);
         
     }
+    
     checkValidity(value, rules){
-        let mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        let phoneno = /^\d{10}$/;
+        
         let isValid = true;
         if(rules){
         if(rules.required){
             isValid = value.trim() !== '' && isValid;
         }
         if(rules.length){
-            isValid= value.length === rules.length && isValid;       
-        }
-        if(rules.email){
-            isValid= value.match(mailformat) && isValid;        
+            isValid= value.length === rules.length && isValid; 
+            console.log("lenght : " + isValid)      
         }
         if(rules.number){
             isValid = !isNaN(value) && isValid;
+            console.log("number : " + isValid)
         }
     }
         return isValid;
     }
+  
+
     inputChangedHandler =(event, id) => {
-        if(id === "subjects"){
+        if(id === "Subjects"){
+            console.log(event.checked)
             this.selectedSubjects.push(event.target.value);
+            console.log(this.selectedSubjects);
+            console.log(event.target.value)
         }
         const updatedFormElements ={
             ...this.state.formElements
@@ -154,9 +185,20 @@ class ParticipationForm extends Component{
         updatedFormElement.value= event.target.value;
         updatedFormElement.touched= true
         updatedFormElement.valid= this.checkValidity(updatedFormElement.value, updatedFormElement.validation);    
-        console.log(updatedFormElement.valid);   
+        // console.log(updatedFormElement.valid);   
         updatedFormElements[id] = updatedFormElement;
-        this.setState({formElements: updatedFormElements});
+        let formIsValid= true;
+        for(let id in updatedFormElements){
+            formIsValid = formIsValid && updatedFormElements[id].valid;
+        }
+        
+        this.setState({formElements: updatedFormElements, formIsValid: formIsValid});
+    }
+    subjectsHandler= (event, id) => {
+        // if(id ==="Subjects"){
+        //     console.log(event.checked)
+        // }
+        return ;
     }
     render(){
         let formElementsArray =[];
@@ -170,11 +212,14 @@ class ParticipationForm extends Component{
             return (
                 <FormElements 
                     label={formElement.id}
-                    validations={formElement.validations}
+                    // checkValidity={(event) => this.checkValidity(event, formElement.id, formElement.details.value, formElement.details.validation)}
                     key={formElement.id}
+                    touched={formElement.details.touched}
+                    invalid={!formElement.details.valid}
                     elementType={formElement.details.elementType} 
                     elementConfig={formElement.details.elementConfig} 
                     value={formElement.details.value} 
+                    subjectsHandler={(event) => this.subjectsHandler(event, formElement.id)}
                     changed={(event) => this.inputChangedHandler(event, formElement.id)} />
             )
         })

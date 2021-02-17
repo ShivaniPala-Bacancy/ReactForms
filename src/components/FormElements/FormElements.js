@@ -8,7 +8,7 @@ const FormElements =(props) => {
             formElement= 
                 <div>
                     <input 
-                            onBlur={alert("onBlur")} 
+                            // onBlur={props.checkValidity} 
                             // onFocusOut (this is not recognized)
                             className={styles.FormElements}  
                             type={props.elementConfig.type} 
@@ -16,14 +16,20 @@ const FormElements =(props) => {
                             placeholder={props.elementConfig.placeholder} 
                             name={props.label} 
                             value={props.value} />
-                    <span style={{color: "red"}}>{props.span}</span>
+
+                    {props.touched ? (props.invalid ? <span style={{color: "red"}}>INVALID</span>  : null)  : null};
+
+
+                    {/* <span style={{color: "red"}} hidden={!(props.invalid && props.touched)}>INVALID</span> */}
+                    {console.log("invalid: " + props.invalid)};
+                    {console.log("touched: " + props.touched)};
                 </div>
             break;
         case('radio'):
             formElement= props.elementConfig.placeholder.map(label => {
                 return (
                     <div  key={label}>
-                        <input type="radio" id={label} name="gender" onChange={props.changed} value={label} />
+                        <input onBlur={props.checkValidity} type="radio" id={label} name="gender" onChange={props.changed} value={label} />
                         <label className={styles.InnerLabel} htmlFor={label}>{label}</label>
                         <br />
                     </div>
@@ -36,8 +42,10 @@ const FormElements =(props) => {
                 return(
                     <div key={label}>                          
                         <input  
+                            onBlur={props.checkValidity}
                             type="checkbox" id={label} 
                             name="subjects" 
+                            // checked={props.subjectsHandler}
                             onChange={props.changed} value={label} />
                         <label className={styles.InnerLabel} htmlFor={label}>{label}</label>
                         <br/>
@@ -47,7 +55,7 @@ const FormElements =(props) => {
             break;
         case('select'):
             formElement=(
-                <select className={styles.FormElements}  onChange={props.changed} value={props.value}>
+                <select className={styles.FormElements} onBlur={props.checkValidity}  onChange={props.changed} value={props.value}>
                     {props.elementConfig.placeholder.map(option =>(
                         <option key={option.value} value={option.value}>
                             {option.displayValue}
@@ -58,7 +66,7 @@ const FormElements =(props) => {
             break;
 
         default:
-            formElement= <input className={styles.FormElements} type={props.elementConfig.type} onChange={props.changed} placeholder="enter here" value={props.value} />
+            formElement= <input onBlur={props.checkValidity} className={styles.FormElements} type={props.elementConfig.type} onChange={props.changed} placeholder="enter here" value={props.value} />
             break;
     }
 

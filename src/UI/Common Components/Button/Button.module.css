@@ -1,0 +1,18 @@
+.Button{
+    border: 3px solid rgb(168, 162, 162);
+    background-color: rgb(241, 103, 10);
+    padding: 6px;
+    border-radius: 5px;
+    width: 100px;
+    font-size: large;
+    color: black;
+    text-decoration: none;
+
+}
+.Button:hover{
+    background-color: rgb(230, 157, 109);
+}
+.Button:disabled{
+    background-color: rgb(250, 163, 104);
+    cursor: not-allowed;
+}

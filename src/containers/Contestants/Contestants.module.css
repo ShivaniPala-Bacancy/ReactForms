@@ -16,7 +16,7 @@
     max-width: calc(100% - 2em);
     margin: 1em auto;
     overflow: hidden;
-    width: 800px;
+    width: 900px;
  }
 .Header {
     background-color: #398B93;
@@ -41,4 +41,20 @@
     text-decoration: darkgoldenrod;
     padding: 10px;
     font-size: medium;
+}
+
+.Button {
+    background-color:#398B93;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    /* margin: 10px; */
+    /* margin-left: 46%; */
+    margin-top: 40px;
+    font-weight: bold;
+    
+    
 }
